@@ -1,5 +1,4 @@
 {
-  "name": "Immich - Auto Add Person to Album",
   "nodes": [
     {
       "parameters": {
@@ -8,17 +7,17 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1040,
-        0
+        848,
+        32
       ],
-      "id": "c1164e7f-55aa-47a1-baf2-c637a219b7ad",
+      "id": "db8d17eb-426a-4dbe-b3d3-9bfb9fd39b3b",
       "name": "Extract IDs",
       "executeOnce": true
     },
     {
       "parameters": {
         "method": "PUT",
-        "url": "http://YOUR_IMMICH_IP:2283/api/albums/ENTER_ALBUM_ID_HERE/assets",
+        "url": "=http://YOUR_IMMICH_IP:2283/api/albums/{{ $('Config: Name & Album').item.json.AlbumID }}/assets",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
@@ -29,11 +28,17 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1248,
-        0
+        1072,
+        32
       ],
-      "id": "74d38557-2fda-4b82-9934-95fa7c57d39e",
-      "name": "Add to album"
+      "id": "0d5c35d3-f0ae-47fa-8209-89e9b4b226ea",
+      "name": "Add to album",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "nUzuqQLpcsn8Urz3",
+          "name": "Immich"
+        }
+      }
     },
     {
       "parameters": {
@@ -58,10 +63,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        416,
-        0
+        176,
+        32
       ],
-      "id": "2b339c1c-37ab-454e-aa96-a366395f8e6a",
+      "id": "be27652e-6b99-43e3-8ae3-27e5243914b3",
       "name": "Config: Name & Album"
     },
     {
@@ -83,11 +88,17 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        624,
-        0
+        400,
+        32
       ],
-      "id": "ee2fda94-427e-463e-a143-77fc774773c9",
-      "name": "Find Person ID"
+      "id": "a64a1c08-b86f-424f-bf00-b89db73c333b",
+      "name": "Find Person ID",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "nUzuqQLpcsn8Urz3",
+          "name": "Immich"
+        }
+      }
     },
     {
       "parameters": {
@@ -103,10 +114,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        832,
-        0
+        624,
+        32
       ],
-      "id": "15268022-d0d1-4585-8952-1aaf52c95aa2",
+      "id": "8b346d28-3b3a-4ee5-9f19-8d882f6a6ccd",
       "name": "Fetch Assets"
     },
     {
@@ -122,14 +133,13 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        208,
-        0
+        -48,
+        32
       ],
-      "id": "acf71746-6e3b-43ea-bcb2-dff6b388a5de",
+      "id": "5b0f5e55-5844-4649-855c-ed33e2b2c89c",
       "name": "Daily Trigger"
     }
   ],
-  "pinData": {},
   "connections": {
     "Extract IDs": {
       "main": [
@@ -186,5 +196,9 @@
         ]
       ]
     }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "f0ce1ab60c30b5afab4e2adf691565d6577d58066f2f74d229032c40ee2b2d23"
   }
 }
